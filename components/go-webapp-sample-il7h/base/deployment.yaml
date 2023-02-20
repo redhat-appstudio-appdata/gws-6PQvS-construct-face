@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/created-by: application-service
+    app.kubernetes.io/instance: go-webapp-sample-il7h
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: go-webapp-sample-il7h
+    app.kubernetes.io/part-of: gws
+  name: go-webapp-sample-il7h
+  namespace: pmacik-tenant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-app
+      app.kubernetes.io/instance: go-webapp-sample-il7h
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: go-app
+        app.kubernetes.io/instance: go-webapp-sample-il7h
+    spec:
+      containers:
+      - image: quay.io/redhat-appstudio/user-workload:6PQvS-go-webapp-sample-il7h
+        name: my-go
+        ports:
+        - containerPort: 8081
+          name: http
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 10m
+            memory: 10Mi
+status: {}
